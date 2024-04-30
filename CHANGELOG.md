@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## Version 1.38.1 (2024-04-30)
 
 ## Version 1.37.0 (2024-04-05)
 
