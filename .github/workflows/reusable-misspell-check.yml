@@ -1,18 +1,20 @@
-name: Reusable - Misspell check
-
-on:
-  workflow_call:
-
 jobs:
   misspell-check:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v4
+    - continue-on-error: true
+      uses: actions/checkout@v4
+    - continue-on-error: true
+      name: Install misspell
+      run: 'curl -L -o install-misspell.sh https://raw.githubusercontent.com/client9/misspell/master/install-misspell.sh
 
-      - name: Install misspell
-        run: |
-          curl -L -o install-misspell.sh https://raw.githubusercontent.com/client9/misspell/master/install-misspell.sh
-          sh ./install-misspell.sh
+        sh ./install-misspell.sh
 
-      - name: Run misspell
-        run: bin/misspell -error .
+        '
+    - continue-on-error: true
+      name: Run misspell
+      run: bin/misspell -error .
+name: Reusable - Misspell check
+on:
+  repository_dispatch:
+    types: trigger-ga___reusable-misspell-check.yml

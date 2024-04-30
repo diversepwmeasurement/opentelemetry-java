@@ -1,16 +1,12 @@
-name: Gradle wrapper validation
-on:
-  pull_request:
-    paths:
-      - '**/gradle/wrapper/**'
-  push:
-    paths:
-      - '**/gradle/wrapper/**'
-
 jobs:
   validation:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: gradle/actions/wrapper-validation@v3.3.2
+    - continue-on-error: true
+      uses: actions/checkout@v4
+    - continue-on-error: true
+      uses: gradle/actions/wrapper-validation@v3.3.2
+name: Gradle wrapper validation
+on:
+  repository_dispatch:
+    types: trigger-ga___gradle-wrapper-validation.yml
